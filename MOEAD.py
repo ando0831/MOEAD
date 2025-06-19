@@ -28,12 +28,15 @@ class MOEAD:
     def get_HV(self):
         return self.HVlist
     
+    # 関数値を返す
     def get_F(self):
         return self.f_values
     
+    # 変数値を返す
     def get_X(self):
         return self.pop
     
+    # 最適化
     def optimize(self, Problem, population, n_gen,
                  Decomposition=Tchebicheff(),
                  Crossover=SBX(),

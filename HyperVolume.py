@@ -5,11 +5,11 @@ class HV:
     def __init__(self, r_point=[1.0, 1.0]):
         self.r_point = r_point
         
-    # --qはpに支配されているか(最小化問題想定)--
+    # qはpに支配されているか(最小化問題想定)
     def is_dominated(self, p, q):
         return np.all(p <= q) and np.any(p < q)
 
-    # --非劣解の集合(パレートフロント)を抽出--
+    # 非劣解の集合(パレートフロント)を抽出
     def get_pareto_front(self, F):
         pareto_points = []
         # 非劣解を抽出
@@ -27,6 +27,7 @@ class HV:
 
         return pareto_points
     
+    # 計算
     def eval(self, F):
         HyperVolume = 0
         A = self.get_pareto_front(F)

@@ -7,6 +7,7 @@ class Crossover:
         self.n_parents = n_parents
         self.n_offsprings = n_offsprings
 
+# SBX交叉
 class SBX(Crossover):
 
     def __init__(self, eta=20, n_parents=2, n_offsprings=1, xu=1.0, xl=0):

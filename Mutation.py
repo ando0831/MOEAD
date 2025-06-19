@@ -7,7 +7,7 @@ class Mutation:
         self.mutation_prob = mutation_prob
 
 
-# --- PM突然変異 ---
+# PM突然変異
 class PM(Mutation):
     
     def __init__(self, eta=20, mutation_prob=1/30, xu=1.0, xl=0, n_var=30):
