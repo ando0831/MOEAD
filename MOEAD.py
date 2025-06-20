@@ -26,7 +26,7 @@ class MOEAD:
     
     # HVを返す
     def get_HV(self):
-        return self.HVlist
+        return self.HV_past
     
     # 関数値を返す
     def get_F(self):
@@ -42,11 +42,14 @@ class MOEAD:
                  Crossover=SBX(),
                  Mutation=PM(),
                  save_HV=True):
-        #xuとxlを定義
+        #xu, xl, n_varを定義
         Crossover.xu = Problem.xu
         Crossover.xl = Problem.xl
+        Crossover.n_var = Problem.n_var
         Mutation.xu = Problem.xu
         Mutation.xl = Problem.xl
+        Mutation.n_var = Problem.n_var
+        Mutation.mutation_prob = 1 / Mutation.n_var
         # HVのインスタンス化
         hypervolume = HV()
         # 初期解
