@@ -55,7 +55,6 @@ class ZDT4(ZDT):
 
     def eval(self, x):
         f1 = x[0]
-        #np.sum(x[1:] ** 2 - 10 * np.cos(4 * np.pi * x[1:]))
         g = 1.0 + 10 * (self.n_var - 1)
         for i in range(1, self.n_var):
             g += x[i] * x[i] - 10.0 * np.cos(4.0 * np.pi * x[i])

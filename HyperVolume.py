@@ -32,7 +32,10 @@ class HV:
         HyperVolume = 0
         A = self.get_pareto_front(F)
         for i in range(len(A)-1):
-            HyperVolume += (A[i+1][0] - A[i][0]) * (self.r_point[1] - A[i][1])
+            if self.r_point[0] < A[i][0] or self.r_point[1] < A[i][1]:
+                pass
+            else:
+                HyperVolume += (A[i+1][0] - A[i][0]) * (self.r_point[1] - A[i][1])
         HyperVolume += (self.r_point[0] - A[len(A)-1][0]) * (self.r_point[1] - A[len(A)-1][1])
 
-        return HyperVolume
+        return max(HyperVolume, 0)
