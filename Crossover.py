@@ -41,7 +41,7 @@ class SBX(Crossover):
                     else:
                         betaq2 = pow(1.0 / (2.0 - rand * alpha2), 1.0 / (self.eta + 1.0))
                     c2 = 0.5 * ((x1 + x2) + betaq2 * (x2 - x1))
-                    child2[i] = np.clip(c1, self.xl[i], self.xu[i])
+                    child2[i] = np.clip(c2, self.xl[i], self.xu[i])
 
         if self.n_offsprings == 1:
             child = random.choice([child1, child2])

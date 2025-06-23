@@ -5,15 +5,18 @@ from Crossover import SBX
 from Mutation import PM
 from HyperVolume import HV
 from Problem import ZDT1
+import WeightVector as WV
 
 class MOEAD:
     
-    def __init__(self, n_parents=2, n_offsprings=1, pop_size=100, n_neighbors=10):
+    def __init__(self, n_obj=2, n_parents=2, n_offsprings=1, pop_size=100, n_neighbors=10):
+        self.n_obj = n_obj
         self.n_parents = n_parents
         self.n_offsprings = n_offsprings
         self.pop_size = pop_size
         self.n_neighbors = n_neighbors
-        self.weights = np.array([[i / (pop_size - 1), 1 - i / (pop_size - 1)]  for i in range(pop_size)])
+        #self.weights = WV.simple(pop_size)
+        self.weights = WV.das_dennis_weights(self.n_obj, self.pop_size-2)
         self.neighbors = np.argsort([[np.linalg.norm(w - wi) for w in self.weights] for wi in self.weights], axis=1)[:, :self.n_neighbors]
         
     # 重みベクトルを返す
@@ -35,6 +38,7 @@ class MOEAD:
     # 変数値を返す
     def get_X(self):
         return self.pop
+    
     
     # 最適化
     def optimize(self, Problem, population, n_gen,
@@ -73,7 +77,7 @@ class MOEAD:
                 offspring = Mutation.do(offspring)
                 # 関数値
                 f_offspring = Problem.eval(offspring)
-                # 理想点
+                # 理想点の更新
                 ideal = np.minimum(ideal, f_offspring)
                 # 置換判定
                 for j in self.neighbors[i]:

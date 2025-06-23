@@ -45,6 +45,7 @@ class ZDT3(ZDT):
         g = 1 + 9 * sum(x[1:]) / (self.n_var - 1)
         h = 1 - np.sqrt(f1 / g) - (f1 / g) * np.sin(10 * np.pi * f1)
         f2 = g * h
+        
         return np.array([f1, f2])
     
 class ZDT4(ZDT):
@@ -64,7 +65,7 @@ class ZDT4(ZDT):
         
         h = 1 - np.sqrt(f1 / g)
         f2 = g * h
-
+        
         return np.array([f1, f2])
     
     def generate_pop(self, pop_size):
@@ -72,6 +73,17 @@ class ZDT4(ZDT):
         population[:, 0] = np.random.uniform(0, 1, size=pop_size)
 
         return population
+    
+class ZDT6(ZDT):
+    def __init__(self, n_var=10):
+        super().__init__(n_var=n_var)
+
+    def eval(self, x):
+        f1 = 1 - np.exp(-4 * x[0]) * np.power(np.sin(6 * np.pi * x[0]), 6)
+        g = 1 + 9.0 * np.power(np.sum(x[1:]) / (self.n_var - 1.0), 0.25)
+        f2 = g * (1 - np.power(f1 / g, 2))
+        
+        return np.array([f1, f2])
     
 
 class UF6(ZDT):
